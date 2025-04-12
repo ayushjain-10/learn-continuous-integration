@@ -13,6 +13,10 @@ on:
 jobs:
   "run-jest-tests":
     runs-on: self-hosted
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ github.workspace }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -26,6 +30,10 @@ jobs:
   "setup-sample-data":
     runs-on: self-hosted
     if: github.ref == 'refs/heads/deploy' && github.event_name == 'push'
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ github.workspace }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
