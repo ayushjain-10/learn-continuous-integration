@@ -1,0 +1,19 @@
+name: Test Runner
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-job:
+    runs-on: [self-hosted, GitHubRunnerNoSpaces]
+    steps:
+      - name: Simple Test Command
+        run: echo "Hello from runner"
+      
+      - name: Show Working Directory
+        run: pwd
+        
+      - name: List Files
+        run: ls -la 
