@@ -15,19 +15,19 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-        with:
-          path: repo
 
       - name: Debug Environment
         run: |
           echo "Current directory: $(pwd)"
           echo "GitHub workspace: $GITHUB_WORKSPACE"
-          ls -la
+          if [ -d "$(pwd)" ]; then
+            ls -la "$(pwd)"
+          else
+            echo "Current directory does not exist or cannot be accessed."
+          fi
 
       - name: Install Dependencies
-        working-directory: ./repo
         run: npm install
 
       - name: Run Tests
-        working-directory: ./repo
         run: npm run test
