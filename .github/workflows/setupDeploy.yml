@@ -7,7 +7,7 @@ on:
 
 jobs: 
   "setup-database":
-    runs-on: self-hosted
+    runs-on: [self-hosted, GitHubRunnerNoSpaces]
     defaults:
       run:
         shell: sh
