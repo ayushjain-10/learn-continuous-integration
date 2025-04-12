@@ -7,7 +7,7 @@ on:
 
 jobs:
   test-job:
-    runs-on: [self-hosted, GitHubRunnerNoSpaces]
+    runs-on: self-hosted
     steps:
       - name: Simple Test Command
         run: echo "Hello from runner"
