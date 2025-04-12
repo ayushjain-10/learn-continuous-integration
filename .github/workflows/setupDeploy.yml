@@ -11,12 +11,23 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          path: repo
+
+      - name: Debug Environment
+        run: |
+          echo "Current directory: $(pwd)"
+          echo "GitHub workspace: $GITHUB_WORKSPACE"
+          ls -la
 
       - name: Install Dependencies
+        working-directory: ./repo
         run: npm install
 
       - name: Delete old database
+        working-directory: ./repo
         run: npm run remove-sample-data -- "mongodb://127.0.0.1:27017/my_library_db"
 
       - name: Seed database
+        working-directory: ./repo
         run: npm run insert-sample-data -- "mongodb://127.0.0.1:27017/my_library_db"
