@@ -16,6 +16,16 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
+      - name: Debug Environment
+        run: |
+          echo "Current directory: $(pwd)"
+          echo "GitHub workspace: $GITHUB_WORKSPACE"
+          if [ -d "$(pwd)" ]; then
+            ls -la "$(pwd)"
+          else
+            echo "Current directory does not exist or cannot be accessed."
+          fi
+
       - name: Install Dependencies
         run: npm install
 
