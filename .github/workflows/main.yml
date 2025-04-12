@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - deploy
 
   pull_request:
     branches:
@@ -11,7 +12,7 @@ on:
 
 jobs:
   "run-jest-tests":
-    runs-on: cs5500-self-hosted
+    runs-on: self-hosted
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -21,3 +22,19 @@ jobs:
 
       - name: Run Tests
         run: npm run test
+
+  "setup-sample-data":
+    runs-on: self-hosted
+    if: github.ref == 'refs/heads/deploy' && github.event_name == 'push'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Remove Existing Database
+        run: npx ts-node remove_db.ts
+
+      - name: Insert Sample Data
+        run: npx ts-node insert_sample_data.ts
